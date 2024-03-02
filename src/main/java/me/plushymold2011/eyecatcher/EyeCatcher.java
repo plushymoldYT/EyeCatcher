@@ -29,10 +29,18 @@ public class EyeCatcher extends JavaPlugin {
         banConfig = loadConfig("ban-config.yml");
 
         // Register listeners
-        loadListeners();
+        getServer().getPluginManager().registerEvents(new EssentialsCommandListener(), this);
+        getServer().getPluginManager().registerEvents((Listener) new AdminLoginListener(), this);
+        getServer().getPluginManager().registerEvents((Listener) new BukkitCommandListener(), this);
+        getServer().getPluginManager().registerEvents(new JoinListener(), this);
 
         // Register commands
-        loadCommands();
+        guiCommand guiCmd = new guiCommand(this);
+        getCommand("ban-gui").setExecutor(guiCmd);
+        getServer().getPluginManager().registerEvents(new BanMenuHandeler(), this);
+
+        ReloadCommand reloadCmd = new ReloadCommand(this);
+        getCommand("reload-config").setExecutor(reloadCmd);
 
         getLogger().info("EyeCatcher has been enabled successfully!");
     }
@@ -45,24 +53,6 @@ public class EyeCatcher extends JavaPlugin {
     private FileConfiguration loadConfig(String fileName) {
         saveDefaultConfig();
         return getConfig();
-    }
-
-    private void loadListeners() {
-        // Register your listeners here
-        getServer().getPluginManager().registerEvents(new EssentialsCommandListener(), this);
-        getServer().getPluginManager().registerEvents((Listener) new AdminLoginListener(), this);
-        getServer().getPluginManager().registerEvents((Listener) new BukkitCommandListener(), this);
-        getServer().getPluginManager().registerEvents(new JoinListener(), this);
-    }
-
-    private void loadCommands() {
-        // Register commands
-        guiCommand guiCmd = new guiCommand(this);
-        getCommand("ban-gui").setExecutor(guiCmd);
-        getServer().getPluginManager().registerEvents(new BanMenuHandeler(), this);
-
-        ReloadCommand reloadCmd = new ReloadCommand(this);
-        getCommand("reload-config").setExecutor(reloadCmd);
     }
 
     public void reloadBanConfig() {
