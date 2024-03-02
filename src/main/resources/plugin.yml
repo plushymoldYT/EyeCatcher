@@ -3,6 +3,7 @@ version: '${project.version}'
 main: me.plushymold2011.eyecatcher.EyeCatcher
 authors:
   - PlushyMold2011
+  - Blue Obsidian
 description: Easy Tool To Catch Those Sneaky Staff Members in the act!
 
 permissions:

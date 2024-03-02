@@ -8,9 +8,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinListener implements Listener {
 
-    private EyeCatcher plugin = new EyeCatcher();
+    private final EyeCatcher plugin;
 
-    public JoinListener(){
+    public JoinListener( EyeCatcher plugin ) {
         this.plugin = plugin;
     }
 

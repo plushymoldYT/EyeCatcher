@@ -14,9 +14,11 @@ import me.plushymold2011.eyecatcher.Listeners.EssentialsCommandListener;
 import me.plushymold2011.eyecatcher.Listeners.JoinListener;
 
 public class EyeCatcher extends JavaPlugin {
-
     private FileConfiguration config;
     private static FileConfiguration banConfig;
+
+    // Declare JoinListener field
+    private JoinListener joinListener;
 
     public static EyeCatcher getPlugin() {
         return (EyeCatcher) Bukkit.getPluginManager().getPlugin("EyeCatcher");
@@ -30,9 +32,10 @@ public class EyeCatcher extends JavaPlugin {
 
         // Register listeners
         getServer().getPluginManager().registerEvents(new EssentialsCommandListener(), this);
-        getServer().getPluginManager().registerEvents((Listener) new AdminLoginListener(), this);
-        getServer().getPluginManager().registerEvents((Listener) new BukkitCommandListener(), this);
-        getServer().getPluginManager().registerEvents(new JoinListener(), this);
+
+        // Initialize JoinListener only once
+        joinListener = new JoinListener( this );
+        getServer().getPluginManager().registerEvents(joinListener, this);
 
         // Register commands
         guiCommand guiCmd = new guiCommand(this);
