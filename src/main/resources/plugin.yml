@@ -1,0 +1,5 @@
+name: EyeCatcher
+version: '${project.version}'
+main: me.plushymold2011.eyecatcher.EyeCatcher
+authors: [Plushymold2011]
+description: Easy Tool To Catch Those Sneaky Staff Members in the act!
