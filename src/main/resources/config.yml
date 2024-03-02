@@ -1,4 +1,12 @@
-#EyeCatcher Development Build Made By plushymold.yt
+# EyeCatcher Development Build Made By PlushyMold.yt
 
-join-message-enabled: 'true'
-join-message: 'Welcome to the server, %player%'
+# Server Configuration
+server-name: 'INSERT-SERVER-NAME'
+
+# Enable Custom-Private Join Message / Message of the day
+join-message-enabled: true
+join-message: '&3Welcome to the server, &b%player%'
+
+# Discord Command Configuration
+discord-enabled: true
+discord-url: 'INSERT-DISCORD-URL'

@@ -23,53 +23,56 @@ public class guiCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Only players can execute this command.");
+            return false;
+        }
 
+        Player player = (Player) sender;
 
-        if (sender instanceof Player) {
-            Player p = (Player) sender;
+        // Register the inventory click event listener
+        Bukkit.getPluginManager().registerEvents(new BanMenuHandeler(), plugin);
 
-            // Register the inventory click event listener
-            Bukkit.getPluginManager().registerEvents(new BanMenuHandeler(), this.plugin);
+        // Calculate number of pages needed based on online players count
+        int onlinePlayersCount = Bukkit.getOnlinePlayers().size();
+        int totalPages = (int) Math.ceil((double) onlinePlayersCount / ITEMS_PER_PAGE);
 
-            // Calculate number of pages needed based on online players count
-            int onlinePlayersCount = Bukkit.getOnlinePlayers().size();
-            int totalPages = (int) Math.ceil((double) onlinePlayersCount / ITEMS_PER_PAGE);
+        // Check if the current page is within bounds
+        int currentPage = 0;
 
-            // Check if the current page is within bounds
-            int currentPage = 0;
+        // Create GUI
+        Inventory gui = Bukkit.createInventory(player, getInventorySize(onlinePlayersCount), "EyeCatcher Ban Menu - Page " + (currentPage + 1));
 
-            // Create GUI
-            Inventory gui = Bukkit.createInventory(p, getInventorySize(onlinePlayersCount), "EyeCatcher Ban Menu - Page " + (currentPage + 1));
+        // Populate GUI with player heads
+        int startIndex = currentPage * ITEMS_PER_PAGE;
+        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, onlinePlayersCount);
 
-            // Populate GUI with player heads
-            int startIndex = currentPage * ITEMS_PER_PAGE;
-            int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, onlinePlayersCount);
-
-            int index = 0;
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                if (index >= startIndex && index < endIndex) {
-                    ItemStack item = new ItemStack(Material.PLAYER_HEAD, 1);
-                    SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
-                    skullMeta.setOwningPlayer(player);
-                    skullMeta.setDisplayName(player.getName());
+        int index = 0;
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            if (index >= startIndex && index < endIndex) {
+                ItemStack item = new ItemStack(Material.PLAYER_HEAD);
+                SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
+                if (skullMeta != null) {
+                    skullMeta.setOwningPlayer(onlinePlayer);
+                    skullMeta.setDisplayName(onlinePlayer.getName());
                     item.setItemMeta(skullMeta);
                     gui.addItem(item);
                 }
-                index++;
             }
-
-            // Add next page button
-            if (totalPages > 1 && currentPage < totalPages - 1) {
-                ItemStack nextPageButton = new ItemStack(Material.ARROW);
-                ItemMeta nextPageMeta = nextPageButton.getItemMeta();
-                nextPageMeta.setDisplayName("Next Page");
-                nextPageButton.setItemMeta(nextPageMeta);
-                gui.setItem(gui.getSize() - 1, nextPageButton);
-            }
-
-            p.openInventory(gui);
+            index++;
         }
+
+        // Add next page button
+        if (totalPages > 1 && currentPage < totalPages - 1) {
+            ItemStack nextPageButton = new ItemStack(Material.ARROW);
+            ItemMeta nextPageMeta = nextPageButton.getItemMeta();
+            nextPageMeta.setDisplayName("Next Page");
+            nextPageButton.setItemMeta(nextPageMeta);
+            gui.setItem(gui.getSize() - 1, nextPageButton);
+        }
+
+        player.openInventory(gui);
         return true;
     }
 

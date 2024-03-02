@@ -1,5 +1,23 @@
 name: EyeCatcher
 version: '${project.version}'
 main: me.plushymold2011.eyecatcher.EyeCatcher
-authors: [Plushymold2011]
+authors:
+  - PlushyMold2011
 description: Easy Tool To Catch Those Sneaky Staff Members in the act!
+
+permissions:
+  EyeCatcher.commands.ban-gui:
+    description: Permission to use /ban-gui command
+  EyeCatcher.commands.reload-cmd:
+    description: Permission to use /reload-config command
+
+commands:
+  ban-gui:
+    usage: /ban-gui
+    permission: EyeCatcher.commands.ban-gui
+    permission-message: You don't have permission to use this command.
+
+  reload-config:
+    usage: /reload-config
+    permission: EyeCatcher.commands.reload-cmd
+    permission-message: You don't have permission to use this command.

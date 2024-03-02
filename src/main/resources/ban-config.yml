@@ -1,0 +1,9 @@
+# Configuration file for the ban reasons / commands to execute upon ban using the ban menu
+
+ban-reasons:
+  - 'Hack Client'
+  - 'Spamming'
+  - 'Inappropriate Language'
+  - 'Other'
+
+ban-command: 'ban %player% %reason%'
