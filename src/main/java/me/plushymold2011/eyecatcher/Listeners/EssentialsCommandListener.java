@@ -20,7 +20,7 @@ public class EssentialsCommandListener implements Listener {
                 // Iterate through online players and send notification to those with the permission
                 for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
                     if (onlinePlayer.hasPermission("EyeCatcher.admin.CommandSnooper")) {
-                        onlinePlayer.sendMessage("§7[§e" + player.getName() + ": §7is using /tp to teleport to " + targetPlayerName + "§7]");
+                        onlinePlayer.sendMessage("§7§o[§7§o" + player.getName() + ": §e§ois using /tp to teleport to " + targetPlayerName + "§7§o]");
                     }
                 }
             }

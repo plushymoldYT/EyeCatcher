@@ -11,6 +11,8 @@ permissions:
     description: Permission to use /ban-gui command
   EyeCatcher.commands.reload-cmd:
     description: Permission to use /reload-config command
+  EyeCatcher.notification.login:
+    description: Permission to receive login notifications
 
 commands:
   ban-gui:

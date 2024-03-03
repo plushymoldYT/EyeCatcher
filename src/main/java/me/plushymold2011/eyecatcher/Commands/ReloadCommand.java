@@ -20,7 +20,6 @@ public class ReloadCommand implements CommandExecutor {
             // Reload main configuration
             plugin.reloadConfig();
             // Reload ban configuration
-            plugin.reloadBanConfig();
 
             sender.sendMessage(ChatColor.GREEN + "Successfully reloaded EyeCatcher configurations!");
         } else {
