@@ -28,11 +28,15 @@ public class BanMenu {
             return;
         }
 
-
-
+        FileConfiguration banConfig = plugin.getBanConfig();
         List<String> banOptions;
-
-        banOptions = getDefaultBanOptions();
+        if (banConfig == null || !banConfig.contains("ban-reasons")) {
+            // If the ban configuration is null or does not contain the ban-reasons section, provide default ban reasons
+            banOptions = getDefaultBanOptions();
+        } else {
+            // Get ban reasons from the ban-config.yml file
+            banOptions = banConfig.getStringList("ban-reasons");
+        }
 
         // Populate ban menu with ban options
         for (String banReason : banOptions) {
@@ -49,6 +53,6 @@ public class BanMenu {
     // Provide default ban reasons if ban-config.yml or ban-reasons section is not found
     private List<String> getDefaultBanOptions() {
         // You can customize default ban options here
-        return List.of("Hack Client", "Spamming", "Inappropriate Language", "Other");
+        return List.of("Hack Client");
     }
 }

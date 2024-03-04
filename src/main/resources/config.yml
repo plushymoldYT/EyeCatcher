@@ -10,7 +10,3 @@ join-message: '&3Welcome to the server, &b%player%'
 # Discord Command Configuration
 discord-enabled: true
 discord-url: 'INSERT-DISCORD-URL'
-
-# Staff Logon Notifications(%Player% Variable = Current Player %event-player% = Login Event Player)
-staff-login-notifications-enabled: true
-staff-login-notification-message: '&7&o[%event-player%: &e&oHas Joined The Server&7&o]'

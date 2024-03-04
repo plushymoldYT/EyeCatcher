@@ -1,7 +1,7 @@
 package me.plushymold2011.eyecatcher.Commands;
 
 import me.plushymold2011.eyecatcher.EyeCatcher;
-import me.plushymold2011.eyecatcher.Handlers.BanMenuHandler;
+import me.plushymold2011.eyecatcher.Handlers.BanMenuHandeler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -32,7 +32,7 @@ public class guiCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         // Register the inventory click event listener
-        Bukkit.getPluginManager().registerEvents(new BanMenuHandler(plugin), plugin);
+        Bukkit.getPluginManager().registerEvents(new BanMenuHandeler(), plugin);
 
         // Calculate number of pages needed based on online players count
         int onlinePlayersCount = Bukkit.getOnlinePlayers().size();
