@@ -26,6 +26,7 @@ public class JoinListener implements Listener {
                 joinMessage = joinMessage.replace("%player%", e.getPlayer().getDisplayName());
                 e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', joinMessage));
             }
+
         }
     }
 
