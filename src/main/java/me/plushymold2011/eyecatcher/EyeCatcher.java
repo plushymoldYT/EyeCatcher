@@ -3,12 +3,10 @@ package me.plushymold2011.eyecatcher;
 import me.plushymold2011.eyecatcher.Handlers.BanMenuHandeler;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.plushymold2011.eyecatcher.Commands.ReloadCommand;
 import me.plushymold2011.eyecatcher.Commands.guiCommand;
 import me.plushymold2011.eyecatcher.Handlers.BanMenuHandeler;
-import me.plushymold2011.eyecatcher.Listeners.AdminLoginListener;
 import me.plushymold2011.eyecatcher.Listeners.BukkitCommandListener;
 import me.plushymold2011.eyecatcher.Listeners.EssentialsCommandListener;
 import me.plushymold2011.eyecatcher.Listeners.JoinListener;
@@ -17,8 +15,10 @@ public class EyeCatcher extends JavaPlugin {
     private FileConfiguration config;
     private static FileConfiguration banConfig;
 
-    // Declare JoinListener field
+    // Declare JoinListener, BukkitCommandListener, and EssentialsCommandListener fields
     private JoinListener joinListener;
+    private BukkitCommandListener bukkitCommandListener;
+    private EssentialsCommandListener essentialsCommandListener;
 
     public static EyeCatcher getPlugin() {
         return (EyeCatcher) Bukkit.getPluginManager().getPlugin("EyeCatcher");
@@ -31,10 +31,14 @@ public class EyeCatcher extends JavaPlugin {
         banConfig = loadConfig("ban-config.yml");
 
         // Register listeners
-        getServer().getPluginManager().registerEvents(new EssentialsCommandListener(), this);
+        essentialsCommandListener = new EssentialsCommandListener(this);
+        getServer().getPluginManager().registerEvents(essentialsCommandListener, this);
+
+        bukkitCommandListener = new BukkitCommandListener(this);
+        getServer().getPluginManager().registerEvents(bukkitCommandListener, this);
 
         // Initialize JoinListener only once
-        joinListener = new JoinListener( this );
+        joinListener = new JoinListener(this);
         getServer().getPluginManager().registerEvents(joinListener, this);
 
         // Register commands
@@ -61,6 +65,7 @@ public class EyeCatcher extends JavaPlugin {
     public void reloadBanConfig() {
         banConfig = loadConfig("ban-config.yml");
     }
+
     public static FileConfiguration getBanConfig() {
         return banConfig;
     }
