@@ -4,9 +4,13 @@
 server-name: 'INSERT-SERVER-NAME'
 
 # Enable Custom-Private Join Message / Message of the day
-join-message-enabled: true
+join-message-enabled: false
 join-message: '&3Welcome to the server, &b%player%'
 
 # Discord Command Configuration
-discord-enabled: true
+discord-enabled: false
 discord-url: 'INSERT-DISCORD-URL'
+
+# CommandSnooper Configuration
+# CommandSnooper command executor to look for EyeCatcher.admin.CommandSnooper
+commandSnooper-enabled: true
